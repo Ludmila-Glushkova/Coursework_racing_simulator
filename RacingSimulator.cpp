@@ -11,44 +11,31 @@ int print_choose(int type)
     return type;
 }
 
-bool check_correct_type_race(int type)
-{
-    if (type == static_cast <int>(TypeRace::Ground))
-    {
-        std::cout << "Вы выбрали Гонку для наземного транспорта" << std::endl;
-        return true;
-    }
-    else if (type == static_cast <int>(TypeRace::Air))
-    {
-        std::cout << "Вы выбрали Гонку для воздушного транспорта" << std::endl;
-        return true;
-    }
-    else if (type == static_cast <int>(TypeRace::GroundAndAir))
-    {
-        std::cout << "Вы выбрали Гонку для наземного и воздушного транспорта" << std::endl;
-        return true;
-    }
-    else
-    {
-        std::cout << "Вы выбрали несуществующий тип гонки" << std::endl;
-        return false;
-    }
-}
-
 int choose_race()
 {
     int type = 0;
+    bool flag = false;
     do
     {
-        type = print_choose(type);
-        while (!std::cin.good())
+        type = print_choose(type);  
+        if (type == static_cast <int>(TypeRace::Ground))
         {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            type = print_choose(type);
-        };
-        std::cout << std::endl;
-    } while (!check_correct_type_race(type));
+            flag = true;
+        }
+        else if (type == static_cast <int>(TypeRace::Air))
+        {
+            flag = true;
+        }
+        else if (type == static_cast <int>(TypeRace::GroundAndAir))
+        {
+            flag = true;
+        }
+        else
+        {
+            std::cout << "Некорректный выбор." << std::endl;
+            flag = false;
+        }
+    } while (!flag);
     return type;
 }
 
@@ -68,21 +55,21 @@ bool game_over()
             std::cin >> tmp;
         } while (!(tmp == 1 || tmp == 2));
     };
-    if (tmp != 2)
+    if (tmp == 1)
     {
         return false;
     }
     return true;
 }
 
-void transport_reg(int type, float distance, Race::Transport* arr, const int ik)
+void transport_reg(int type, float distance, Race::Transport* arr, const int arr_size)
 {
     bool flag = false;
     int type_transp = 0;
     int count_reg = 0;
     do
     {
-        type_transp = print_transport_reg(type, type_transp, count_reg, &flag, arr, ik);
+        type_transp = print_transport_reg(type, type_transp, count_reg, &flag, arr, arr_size);
         if (type_transp == static_cast<int>(TypeTransport::Camel))
         {
             Race::Camel Camel;
@@ -142,9 +129,9 @@ void transport_reg(int type, float distance, Race::Transport* arr, const int ik)
     } while (!flag);
 }
 
-bool check_transp_reg(int type_transp, Race::Transport* arr, const int ik)
+bool check_transp_reg(int type_transp, Race::Transport* arr, const int arr_size)
 {
-    for (int i = 0; i < ik; i++)
+    for (int i = 0; i < arr_size; i++)
     {
         if (type_transp == 0)
         {
@@ -157,16 +144,18 @@ bool check_transp_reg(int type_transp, Race::Transport* arr, const int ik)
             return false;
         }
     }
+    return true;
 }
 
-int print_transport_reg(int type, int type_transp, int count_reg, bool* flag, Race::Transport* arr, const int ik)
+int print_transport_reg(int type, int type_transp, int count_reg, bool* flag, Race::Transport* arr, const int arr_size)
 {
     if (count_reg != 0)
     {
+        std::cout << std::endl;
         std::cout << "Зарегистрированные транспортные средства: " << std::endl;
-        for (int i = 0; i < ik; i++)
+        for (int i = 0; i < arr_size; i++)
         {
-            if (i != 0 && i != (ik - 1))
+            if (i != 0 && arr[i].get_transport_name() != "")
             {
                 std::cout << ", ";
             }
@@ -176,29 +165,33 @@ int print_transport_reg(int type, int type_transp, int count_reg, bool* flag, Ra
     switch (type)
     {
     case static_cast<int>(TypeRace::Ground):
-        std::cout << std::endl << "Зарегистрируйте транспортные средства: " << std::endl;
-        std::cout << "1. Верблюд" << std::endl;
-        std::cout << "2. Верблюд-скороход" << std::endl;
-        std::cout << "3. Кентавр" << std::endl;
+        std::cout << std::endl;
+        std::cout << "Зарегистрируйте транспортные средства: " << std::endl;
+        std::cout << "1. Кентавр" << std::endl;
+        std::cout << "2. Верблюд" << std::endl;
+        std::cout << "3. Верблюд-скороход" << std::endl;
         std::cout << "4. Ботинки-вездеходы" << std::endl;
         break;
     case static_cast<int>(TypeRace::Air):
-        std::cout << std::endl << "Зарегистрируйте транспортные средства: " << std::endl;
+        std::cout << std::endl;
+        std::cout << "Зарегистрируйте транспортные средства: " << std::endl;
         std::cout << "1. Ковёр-самолёт" << std::endl;
-        std::cout << "2. Орёл" << std::endl;
-        std::cout << "3. Метла" << std::endl;
+        std::cout << "2. Метла" << std::endl;
+        std::cout << "3. Орёл" << std::endl;
         break;
     case static_cast<int>(TypeRace::GroundAndAir):
-        std::cout << std::endl << "Зарегистрируйте транспортные средства: " << std::endl;
-        std::cout << "1. Верблюд" << std::endl;
-        std::cout << "2. Верблюд-скороход" << std::endl;
-        std::cout << "3. Кентавр" << std::endl;
+        std::cout << std::endl;
+        std::cout << "Зарегистрируйте транспортные средства: " << std::endl;
+        std::cout << "1. Кентавр" << std::endl;
+        std::cout << "2. Верблюд" << std::endl;
+        std::cout << "3. Верблюд-скороход" << std::endl;
         std::cout << "4. Ботинки-вездеходы" << std::endl;
         std::cout << "5. Ковёр-самолёт" << std::endl;
-        std::cout << "6. Орёл" << std::endl;
-        std::cout << "7. Метла" << std::endl;
+        std::cout << "6. Метла" << std::endl;
+        std::cout << "7. Орёл" << std::endl;
         break;
     default:
+        std::cout << std::endl;
         std::cout << "Ошибка регистрации транспортного средства" << std::endl;
         break;
     }
@@ -213,13 +206,13 @@ int print_transport_reg(int type, int type_transp, int count_reg, bool* flag, Ra
             {
                 type_transp += 4;
             };
-        } while (!check_transp_reg(type_transp, arr, ik));
+        } while (!check_transp_reg(type_transp, arr, arr_size));
         return type_transp;
     }
     else if (count_reg >= 2)
     {
         std::cout << "0. Закончить регистрацию и начать гонку" << std::endl;
-        std::cout << "Выберите ещё транспортное средство (либо закончить регистрацию и начать гонку): ";
+        std::cout << "Выберите ещё транспортное средство (или нажмите 0 для начала гонки): ";
 
         do
         {
@@ -228,7 +221,7 @@ int print_transport_reg(int type, int type_transp, int count_reg, bool* flag, Ra
             {
                 type_transp += 4;
             };
-        } while (!check_transp_reg(type_transp, arr, ik));
+        } while (!check_transp_reg(type_transp, arr, arr_size));
 
         if (type_transp == 0)
         {

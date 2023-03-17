@@ -2,6 +2,17 @@
 
 namespace Race
 {
+	Centaur::Centaur()
+	{
+		Transport::name = "Кентавр";
+		Transport::speed = 15;
+		Transport::time_before_rest = 8;
+		Transport::time_rest_1 = 2;
+		Transport::time_rest_2 = 2;
+		Transport::time_rest_then = 2;
+		Transport::transport_num = 1;
+	};
+
 	Camel::Camel()
 	{
 		Transport::name = "Верблюд";
@@ -10,7 +21,7 @@ namespace Race
 		Transport::time_rest_1 = 5;
 		Transport::time_rest_2 = 8;
 		Transport::time_rest_then = 8;
-		Transport::transport_num = 1;
+		Transport::transport_num = 2;
 	};
 
 	CamelFast::CamelFast()
@@ -21,19 +32,9 @@ namespace Race
 		Transport::time_rest_1 = 5;
 		Transport::time_rest_2 = 6.5;
 		Transport::time_rest_then = 8;
-		Transport::transport_num = 2;
-	};
-
-	Centaur::Centaur()
-	{
-		Transport::name = "Кентавр";
-		Transport::speed = 15;
-		Transport::time_before_rest = 8;
-		Transport::time_rest_1 = 2;
-		Transport::time_rest_2 = 2;
-		Transport::time_rest_then = 2;
 		Transport::transport_num = 3;
 	};
+
 	AllTerrainBoots::AllTerrainBoots()
 	{
 		Transport::name = "Ботинки-вездеходы";
@@ -52,17 +53,17 @@ namespace Race
 		Transport::transport_num = 5;
 	};
 
-	Eagle::Eagle()
-	{
-		Transport::name = "Орёл";
-		Transport::speed = 8;
-		Transport::transport_num = 6;
-	};
-
 	Broomstick::Broomstick()
 	{
 		Transport::name = "Метла";
 		Transport::speed = 20;
+		Transport::transport_num = 6;
+	};
+	
+	Eagle::Eagle()
+	{
+		Transport::name = "Орёл";
+		Transport::speed = 8;
 		Transport::transport_num = 7;
 	};
 }
