@@ -29,9 +29,9 @@ namespace Race
 		float last_part_dist = 0;
 		int count_rest = 0;
 		int time_before_rest = 0;
-		int time_rest_1 = 0;
-		int time_rest_2 = 0;
-		int time_rest_then = 0;
+		float time_rest_1 = 0;
+		float time_rest_2 = 0;
+		float time_rest_then = 0;
 
 	};
 }

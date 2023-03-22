@@ -31,12 +31,12 @@ namespace Race
 	{
 		if (speed == 8)
 		{
-			coef = 0.94; //-6%
+			coef = static_cast <float>(0.94); //-6%
 			reduced_distance = distance * coef;
 		}
 		else if (speed == 20)
 		{
-			coef = 1 - ((static_cast<int>(distance / 1000))/100);
+			coef = 1 - (static_cast<float>((static_cast<int>(distance / 1000))) / 100);
 			reduced_distance = distance * coef;
 		}
 		else if (speed == 10)
@@ -47,15 +47,15 @@ namespace Race
 			}
 			else if (distance >= 1000 && distance < 5000)
 			{
-				coef = 0.97;
+				coef = static_cast <float>(0.97);
 			}
 			else if (distance >= 5000 && distance < 10000)
 			{
-				coef = 0.9;
+				coef = static_cast <float>(0.9);
 			}
 			else if (distance >= 10000)
 			{
-				coef = 0.95;
+				coef = static_cast <float>(0.95);
 			}
 			reduced_distance = distance * coef;
 		}
@@ -67,8 +67,8 @@ namespace Race
 
 	float Transport::get_race_time_with_rest(Race::Transport* arr, float distance)
 	{
-		int distance_traveled_to_rest = speed * time_before_rest;
-		int amount_of_rest = distance / distance_traveled_to_rest;
+		float distance_traveled_to_rest = static_cast<float>(speed * time_before_rest);
+		int amount_of_rest = static_cast<int>(distance / distance_traveled_to_rest);
 		last_part_dist = distance - amount_of_rest * distance_traveled_to_rest;
 
 		if (amount_of_rest == 0)
@@ -95,7 +95,8 @@ namespace Race
 			}
 		}
 
-		time_driving_all = distance / speed;
+		//time_driving_all = distance / speed;
+		time_driving_all = time_before_rest * amount_of_rest + last_part_dist / speed;
 		time_all = time_driving_all + time_rest_all;
 
 		return time_all;

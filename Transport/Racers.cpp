@@ -29,9 +29,9 @@ namespace Race
 		Transport::name = "Верблюд-быстроход";
 		Transport::speed = 40;
 		Transport::time_before_rest = 10;
-		Transport::time_rest_1 = 5;
+		Transport::time_rest_1 = 5.0;
 		Transport::time_rest_2 = 6.5;
-		Transport::time_rest_then = 8;
+		Transport::time_rest_then = 8.0;
 		Transport::transport_num = 3;
 	};
 

@@ -106,7 +106,7 @@ void transport_reg(int type, float distance, Race::Transport* arr, const int arr
         {
             Race::MagicCarpet MagicCarpet;
             MagicCarpet.set_registered_transport(true);
-            MagicCarpet.get_race_time_with_rest(&MagicCarpet, distance);
+            MagicCarpet.get_race_time_for_air(&MagicCarpet, distance);
             arr[count_reg] = MagicCarpet;
             count_reg++;
         }
@@ -114,7 +114,7 @@ void transport_reg(int type, float distance, Race::Transport* arr, const int arr
         {
             Race::Eagle Eagle;
             Eagle.set_registered_transport(true);
-            Eagle.get_race_time_with_rest(&Eagle, distance);
+            Eagle.get_race_time_for_air(&Eagle, distance);
             arr[count_reg] = Eagle;
             count_reg++;
         }
@@ -122,7 +122,7 @@ void transport_reg(int type, float distance, Race::Transport* arr, const int arr
         {
             Race::Broomstick Broomstick;
             Broomstick.set_registered_transport(true);
-            Broomstick.get_race_time_with_rest(&Broomstick, distance);
+            Broomstick.get_race_time_for_air(&Broomstick, distance);
             arr[count_reg] = Broomstick;
             count_reg++;
         }
